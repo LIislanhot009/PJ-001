@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>智能产品工作流演示</title>
+    <meta
+      name="description"
+      content="脱敏的智能产品工作流前端演示，展示供应商、内部运营、管理员三类角色的真实使用体验。"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <nav class="nav" aria-label="页面导航">
+        <a class="brand" href="#app">
+          <span class="brand-mark">PW</span>
+          <span>Product Workflow Demo</span>
+        </a>
+        <div class="nav-links">
+          <a href="#app">角色体验</a>
+          <a href="#stage-flow">Stage 流程</a>
+          <a href="#architecture">系统结构</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section id="app" class="app-shell" aria-label="角色工作台演示">
+        <aside class="role-rail" aria-label="角色入口">
+          <div class="rail-title">
+            <span>角色入口</span>
+            <b id="railRoleCount">3</b>
+          </div>
+          <button class="role-tab active" type="button" data-role="supplier">
+            <span>S</span>
+            <strong>供应商</strong>
+            <small>看任务、建议和复检</small>
+          </button>
+          <button class="role-tab" type="button" data-role="operator">
+            <span>O</span>
+            <strong>内部运营</strong>
+            <small>跑选品、预检和复核</small>
+          </button>
+          <button class="role-tab" type="button" data-role="admin">
+            <span>A</span>
+            <strong>管理员</strong>
+            <small>看队列、健康和审计</small>
+          </button>
+
+          <div class="rail-note">
+            <b>公开演示版</b>
+            <p>所有数据均为前端模拟，不连接真实后台，不展示真实源码和环境配置。</p>
+          </div>
+        </aside>
+
+        <section class="workbench">
+          <div class="workbench-top">
+            <div>
+              <p class="eyebrow" id="workspaceEyebrow">Supplier Portal</p>
+              <h1 id="workspaceTitle">供应商协作台</h1>
+              <p id="workspaceDesc">提交产品资料后，只看到可公开的任务进度、风险摘要、改款动作和复检结论。</p>
+            </div>
+            <div class="live-status" id="liveStatus">
+              <span></span>
+              <b>待运行</b>
+            </div>
+          </div>
+
+          <div class="workspace-grid">
+            <div class="demo-screen" aria-live="polite">
+              <div class="screen-toolbar">
+                <div class="traffic"><span></span><span></span><span></span></div>
+                <div class="screen-tabs" id="moduleTabs"></div>
+              </div>
+
+              <div class="screen-content">
+                <section class="input-card">
+                  <div>
+                    <label for="demoInput" id="inputLabel">产品输入</label>
+                    <input id="demoInput" type="text" value="户外庭院灯新品" />
+                  </div>
+                  <button class="run-button" type="button" id="runButton">运行演示流程</button>
+                </section>
+
+                <section class="product-area">
+                  <div class="product-visual" aria-label="模拟产品图">
+                    <div class="lamp-shape">
+                      <i></i>
+                    </div>
+                    <span class="bbox bbox-a">灯罩</span>
+                    <span class="bbox bbox-b">支架</span>
+                    <span class="bbox bbox-c">底座</span>
+                  </div>
+                  <div class="task-panel">
+                    <div class="task-panel-head">
+                      <b id="activeModuleTitle">提交产品资料</b>
+                      <span id="activeModuleTag">图片 + 描述</span>
+                    </div>
+                    <div class="step-list" id="stepList"></div>
+                  </div>
+                </section>
+
+                <section class="result-strip" id="resultStrip"></section>
+              </div>
+            </div>
+
+            <aside class="explain-panel">
+              <div class="explain-head">
+                <span>功能区说明</span>
+                <b id="activeRoleBadge">供应商视角</b>
+              </div>
+              <div class="explain-block">
+                <h2>用户看到什么</h2>
+                <p id="userSees">任务进度、公开摘要、改款动作卡和复检入口。</p>
+              </div>
+              <div class="explain-block">
+                <h2>系统背后做什么</h2>
+                <p id="systemDoes">把产品资料结构化，进入风险预检和改款建议流程。</p>
+              </div>
+              <div class="explain-block">
+                <h2>输出结果</h2>
+                <p id="outputMeans">用可执行语言告诉供应商改哪里、为什么改、下一步怎么复检。</p>
+              </div>
+              <div class="trace-box">
+                <div class="trace-head">
+                  <b>模拟运行日志</b>
+                  <span id="traceId">trace-demo-0001</span>
+                </div>
+                <div class="trace-lines" id="traceLines"></div>
+              </div>
+            </aside>
+          </div>
+        </section>
+      </section>
+
+      <section id="stage-flow" class="section">
+        <div class="section-head">
+          <p class="eyebrow">Animated Business Flow</p>
+          <h2>Stage 1 -> Stage 2 -> Stage 3 的闭环</h2>
+          <p>参考本地展示包的表达方式，公开版只保留脱敏后的流程逻辑和业务对象。</p>
+        </div>
+
+        <div class="stage-map" aria-label="Stage 动效流程图">
+          <div class="stage-node stage-one">
+            <span>Stage 1</span>
+            <strong>机会分析</strong>
+            <p>机会词、属性方向、定位主题</p>
+            <div class="chips"><i>Keywords</i><i>Attributes</i><i>Theme</i></div>
+          </div>
+          <div class="flow-line line-a"></div>
+          <div class="stage-node stage-two">
+            <span>Stage 2</span>
+            <strong>外观风险预检</strong>
+            <p>整图候选、部件复核、人工反馈</p>
+            <div class="chips"><i>TopN</i><i>Parts</i><i>Review</i></div>
+          </div>
+          <div class="flow-line line-b"></div>
+          <div class="stage-node stage-three">
+            <span>Stage 3</span>
+            <strong>改款与复检</strong>
+            <p>结构动作、生产约束、改后复检</p>
+            <div class="chips"><i>Action</i><i>Constraint</i><i>Recheck</i></div>
+          </div>
+          <div class="loop-line"></div>
+        </div>
+      </section>
+
+      <section id="architecture" class="section">
+        <div class="section-head">
+          <p class="eyebrow">System Structure</p>
+          <h2>五层结构如何支撑三类角色</h2>
+          <p>页面展示的是可讲的工程框架：数据、模型、业务对象、流程、决策和观测，不暴露内部实现细节。</p>
+        </div>
+
+        <div class="layer-grid">
+          <article class="layer-card">
+            <span>01</span>
+            <h3>数据层</h3>
+            <p>产品资料、历史样本、反馈记录、任务状态。</p>
+          </article>
+          <article class="layer-card">
+            <span>02</span>
+            <h3>模型层</h3>
+            <p>图片理解、文本理解、相似检索、重排评分。</p>
+          </article>
+          <article class="layer-card">
+            <span>03</span>
+            <h3>对象层</h3>
+            <p>把输出固定成机会、候选、部件、动作卡。</p>
+          </article>
+          <article class="layer-card">
+            <span>04</span>
+            <h3>流程层</h3>
+            <p>把提交、分析、复核、改款、复检串起来。</p>
+          </article>
+          <article class="layer-card">
+            <span>05</span>
+            <h3>决策层</h3>
+            <p>按角色、权限、风险等级决定下一步动作。</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
